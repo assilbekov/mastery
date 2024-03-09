@@ -38,6 +38,7 @@ export const skills = createTable(
     name: varchar("name", { length: 256 }),
     userId: varchar("user_id").notNull(),
     color: varchar("color").notNull(),
+    icon: varchar("icon").notNull(),
     createdAt: timestamp("created_at")
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
