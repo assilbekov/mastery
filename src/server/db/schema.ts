@@ -44,7 +44,7 @@ export const skills = createTable(
     updatedAt: timestamp("updatedAt"),
   },
   (example) => ({
-    nameIndex: index("skill_idx").on(example.name),
+    nameIndex: index("skill_id").on(example.name),
   })
 );
 
@@ -52,7 +52,7 @@ export const timeBlocks = createTable(
   "time_block",
   {
     id: serial("id").primaryKey(),
-    skillId: varchar("skill_id").notNull().references(() => skills.id),
+    skillId: real("skill_id").notNull().references(() => skills.id),
     timeInSeconds: real("time_in_seconds").notNull(),
     comment: varchar("comment", { length: 256 }),
     createdAt: timestamp("created_at")
@@ -61,6 +61,6 @@ export const timeBlocks = createTable(
     updatedAt: timestamp("updatedAt"),
   },
   (example) => ({
-    skillIdIndex: index("skill_id_idx").on(example.skillId),
+    skillIdIndex: index("skill_idx").on(example.skillId),
   })
 );
