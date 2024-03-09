@@ -104,14 +104,14 @@ export default async function Page() {
           Create Skill
         </Button>
       </div>
+      <Alert>
+        <RocketIcon className="h-4 w-4" />
+        <AlertTitle>No skills created!</AlertTitle>
+        <AlertDescription>
+          You have nothing to track here. Create your first skill now.
+        </AlertDescription>
+      </Alert>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <Alert>
-          <RocketIcon className="h-4 w-4" />
-          <AlertTitle>Heads up!</AlertTitle>
-          <AlertDescription>
-            You can add components to your app using the cli.
-          </AlertDescription>
-        </Alert>
         {mockSkills.map((skill) => (
           <Card>
             <CardHeader>
