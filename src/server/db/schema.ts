@@ -3,6 +3,7 @@ import {
   index,
   pgTableCreator,
   serial,
+  real,
   timestamp,
   varchar,
 } from "drizzle-orm/pg-core";
@@ -30,7 +31,7 @@ export const posts = createTable(
   })
 );
 
-export const skill = createTable(
+export const skills = createTable(
   "skill",
   {
     id: serial("id").primaryKey(),
@@ -44,5 +45,22 @@ export const skill = createTable(
   },
   (example) => ({
     nameIndex: index("skill_idx").on(example.name),
+  })
+);
+
+export const timeBlocks = createTable(
+  "time_block",
+  {
+    id: serial("id").primaryKey(),
+    skillId: varchar("skill_id").notNull().references(() => skills.id),
+    timeInSeconds: real("time_in_seconds").notNull(),
+    comment: varchar("comment", { length: 256 }),
+    createdAt: timestamp("created_at")
+      .default(sql`CURRENT_TIMESTAMP`)
+      .notNull(),
+    updatedAt: timestamp("updatedAt"),
+  },
+  (example) => ({
+    skillIndex: index("skill_idx").on(example.skillId),
   })
 );
