@@ -61,6 +61,6 @@ export const timeBlocks = createTable(
     updatedAt: timestamp("updatedAt"),
   },
   (example) => ({
-    skillIndex: index("skill_idx").on(example.skillId),
+    skillIdIndex: index("skill_id_idx").on(example.skillId),
   })
 );
