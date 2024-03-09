@@ -29,3 +29,20 @@ export const posts = createTable(
     nameIndex: index("name_idx").on(example.name),
   })
 );
+
+export const skill = createTable(
+  "skill",
+  {
+    id: serial("id").primaryKey(),
+    name: varchar("name", { length: 256 }),
+    userId: varchar("user_id").notNull(),
+    color: varchar("color").notNull(),
+    createdAt: timestamp("created_at")
+      .default(sql`CURRENT_TIMESTAMP`)
+      .notNull(),
+    updatedAt: timestamp("updatedAt"),
+  },
+  (example) => ({
+    nameIndex: index("skill_idx").on(example.name),
+  })
+);
