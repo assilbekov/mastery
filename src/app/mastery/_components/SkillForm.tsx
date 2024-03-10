@@ -22,6 +22,7 @@ import { CalendarIcon } from "@radix-ui/react-icons"
 import { Calendar } from "~/components/ui/calendar"
 import { Label } from "~/components/ui/label"
 import type { Dispatch, SetStateAction } from "react"
+import { skillIcons } from "./SkillIcons"
 
 const colors: string[] = [
   "bg-blue-500",
@@ -175,9 +176,9 @@ export function SkillForm({ setOpen, onSubmit, isLoading, defaultValues }: Skill
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    {icons.map((icon) => (
-                      <SelectItem key={icon} value={icon}>
-                        <div className="w-4 h-4">{icon}</div>
+                    {skillIcons.map((icon) => (
+                      <SelectItem key={icon.name} value={icon.name}>
+                        <div className="w-4 h-4">{<icon.Icon width={14} height={14} />}</div>
                       </SelectItem>
                     ))}
                   </SelectContent>
