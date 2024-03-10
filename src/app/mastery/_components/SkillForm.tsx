@@ -39,27 +39,9 @@ const colors: string[] = [
   "bg-violet-500",
   "bg-rose-500",
   "bg-lime-500",
-  "bg-coral-500",
   "bg-gray-500",
   "bg-teal-500",
   "bg-fuchsia-500",
-  "bg-gold-500",
-  "bg-orchid-500",
-  "bg-salmon-500",
-  "bg-turquoise-500",
-  "bg-crimson-500",
-  "bg-olive-500",
-  "bg-plum-500",
-  "bg-sienna-500",
-  "bg-steel-500",
-  "bg-aqua-500",
-  "bg-lilac-500",
-  "bg-magenta-500",
-  "bg-ivory-500",
-  "bg-azure-500",
-  "bg-peach-500",
-  "bg-mint-500",
-  "bg-lavender-500",
 ]
 
 const icons = [
@@ -94,16 +76,6 @@ const icons = [
   "yin-yang",
   "z",
 ];
-
-const frequencies = [
-  "daily",
-  "weekly",
-  "bi-weekly",
-  "monthly",
-  "quarterly",
-  "semi-annually",
-  "annually",
-]
 
 const daysToPractice = [
   "monday",
