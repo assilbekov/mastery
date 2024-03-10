@@ -127,18 +127,18 @@ export const skillFormSchema = z.object({
   daysToPractice: z.array(z.enum(daysToPractice as any)).optional(),
 })
 
-export type FinanceFormInfered = z.infer<typeof skillFormSchema>
+export type SkillFormInfered = z.infer<typeof skillFormSchema>
 
 export type SkillFormProps = {
   setOpen: Dispatch<SetStateAction<boolean>>;
   isLoading: boolean;
   onSubmit: (values: z.infer<typeof skillFormSchema>) => Promise<void>;
-  defaultValues?: Partial<FinanceFormInfered>;
+  defaultValues?: Partial<SkillFormInfered>;
 }
 
 export function SkillForm({ setOpen, onSubmit, isLoading, defaultValues }: SkillFormProps) {
   // 1. Define your form.
-  const form = useForm<FinanceFormInfered>({
+  const form = useForm<SkillFormInfered>({
     resolver: zodResolver(skillFormSchema),
     defaultValues,
   });
