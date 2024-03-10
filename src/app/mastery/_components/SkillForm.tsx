@@ -92,8 +92,8 @@ export const skillFormSchema = z.object({
   name: z.string().min(1, {
     message: "Name is required.",
   }),
-  color: z.enum(colors as any, { required_error: "Please select a color" }),
-  icon: z.enum(icons as any, { required_error: "Please select an icon" }),
+  color: z.string({ required_error: "Please select a color" }),
+  icon: z.string({ required_error: "Please select an icon" }),
   description: z.string().optional(),
   goalInSeconds: z.number().int().positive().optional(),
   reminderTime: z.number().int().positive().optional(),
