@@ -32,6 +32,15 @@ export function CreateSkillDialog() {
           setOpen={setOpen}
           onSubmit={async values => mutateAsync({ ...values, color: "", icon: "" })}
           isLoading={isLoading}
+          defaultValues={{
+            name: "",
+            icon: "dumbbell",
+            color: "bg-blue-500",
+            description: "",
+            goalInHours: 100,
+            reminderTime: "12:30",
+            daysToPractice: ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"],
+          }}
         />
       </DialogContent>
     </Dialog>

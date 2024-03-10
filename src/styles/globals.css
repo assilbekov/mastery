@@ -10,10 +10,6 @@
   padding: 0 0 0 0 !important;
 }
 
-.react-time-picker__inputGroup__input {
-  padding: 0 2px !important;
-}
-
 
 @layer base {
   :root {
