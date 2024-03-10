@@ -35,14 +35,14 @@ export const skills = createTable(
   "skill",
   {
     id: serial("id").primaryKey(),
-    name: varchar("name", { length: 256 }),
+    name: varchar("name", { length: 256 }).notNull(),
     userId: varchar("user_id").notNull(),
     color: varchar("color").notNull(),
     icon: varchar("icon").notNull(),
     description: varchar("description", { length: 256 }),
     goalInSeconds: real("goal_in_seconds"),
     reminderTime: real("reminder"),
-    daysToPractice: real("days_to_practice"),
+    daysToPractice: varchar("days_to_practice", { length: 256 }),
     createdAt: timestamp("created_at")
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
