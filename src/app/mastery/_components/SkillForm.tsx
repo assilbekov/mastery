@@ -95,10 +95,10 @@ export const skillFormSchema = z.object({
   }),
   color: z.string({ required_error: "Please select a color" }),
   icon: z.string({ required_error: "Please select an icon" }),
-  description: z.string().optional(),
-  goalInHours: z.number().int().positive().optional(),
-  reminderTime: z.string().optional(),
-  daysToPractice: z.array(z.string()).optional(),
+  description: z.string(),
+  goalInHours: z.number().int().positive(),
+  reminderTime: z.string(),
+  daysToPractice: z.array(z.string()),
 })
 
 export type SkillFormInfered = z.infer<typeof skillFormSchema>

@@ -6,15 +6,13 @@ import { skills } from "~/server/db/schema";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
 export const skillFormSchema = z.object({
-  name: z.string().min(1, {
-    message: "Name is required.",
-  }),
-  color: z.string({ required_error: "Please select a color" }),
-  icon: z.string({ required_error: "Please select an icon" }),
-  description: z.string().optional(),
-  goalInHours: z.number().int().positive().optional(),
-  reminderTime: z.string().optional(),
-  daysToPractice: z.array(z.string()).optional(),
+  name: z.string(),
+  color: z.string(),
+  icon: z.string(),
+  description: z.string(),
+  goalInHours: z.number().int().positive(),
+  reminderTime: z.string(),
+  daysToPractice: z.array(z.string()),
 })
 
 export const skillRouter = createTRPCRouter({
