@@ -23,6 +23,7 @@ import { Calendar } from "~/components/ui/calendar"
 import { Label } from "~/components/ui/label"
 import type { Dispatch, SetStateAction } from "react"
 import { skillIcons } from "./SkillIcons"
+import { SelectCheckbox } from "~/components/ui/select-checkbox"
 
 const colors: string[] = [
   "bg-blue-500",
@@ -55,6 +56,37 @@ const daysToPractice = [
   "sunday",
 ]
 
+const daysToPracticeOptions = [
+  {
+    label: "Monday",
+    value: "monday",
+  },
+  {
+    label: "Tuesday",
+    value: "tuesday",
+  },
+  {
+    label: "Wednesday",
+    value: "wednesday",
+  },
+  {
+    label: "Thursday",
+    value: "thursday",
+  },
+  {
+    label: "Friday",
+    value: "friday",
+  },
+  {
+    label: "Saturday",
+    value: "saturday",
+  },
+  {
+    label: "Sunday",
+    value: "sunday",
+  }
+]
+
 export const skillFormSchema = z.object({
   name: z.string().min(1, {
     message: "Name is required.",
@@ -64,7 +96,7 @@ export const skillFormSchema = z.object({
   description: z.string().optional(),
   goalInSeconds: z.number().int().positive().optional(),
   reminderTime: z.number().int().positive().optional(),
-  daysToPractice: z.array(z.enum(daysToPractice as any)).optional(),
+  daysToPractice: z.array(z.string()).optional(),
 })
 
 export type SkillFormInfered = z.infer<typeof skillFormSchema>
@@ -201,22 +233,12 @@ export function SkillForm({ setOpen, onSubmit, isLoading, defaultValues }: Skill
           name="daysToPractice"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Days to practice <Label className="text-slate-500">(optional)</Label></FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value as any}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Days to practice" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  {daysToPractice.map((day) => (
-                    <SelectItem key={day} value={day}>
-                      {day}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <FormMessage />
+              <SelectCheckbox
+                title="Days to practice"
+                value={field.value || ["sunday"]}
+                onChange={field.onChange}
+                options={daysToPracticeOptions}
+              />
             </FormItem>
           )}
         />
