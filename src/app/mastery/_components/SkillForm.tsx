@@ -165,54 +165,56 @@ export function SkillForm({ setOpen, onSubmit, isLoading, defaultValues }: Skill
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="color"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Color</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Color" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  {colors.map((color) => (
-                    <SelectItem key={color} value={color}>
-                      <div className={cn("w-4 h-4 rounded-full", color)} />
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="icon"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Icon</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Icon" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  {icons.map((icon) => (
-                    <SelectItem key={icon} value={icon}>
-                      <div className="w-4 h-4">{icon}</div>
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <div className="flex gap-4">
+          <FormField
+            control={form.control}
+            name="color"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel>Color</FormLabel>
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Color" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {colors.map((color) => (
+                      <SelectItem key={color} value={color}>
+                        <div className={cn("w-4 h-4 rounded-full", color)} />
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="icon"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel>Icon</FormLabel>
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Icon" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {icons.map((icon) => (
+                      <SelectItem key={icon} value={icon}>
+                        <div className="w-4 h-4">{icon}</div>
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
         <FormField
           control={form.control}
           name="description"
@@ -226,32 +228,34 @@ export function SkillForm({ setOpen, onSubmit, isLoading, defaultValues }: Skill
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="goalInSeconds"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Goal in seconds <Label className="text-slate-500">(optional)</Label></FormLabel>
-              <FormControl>
-                <Input type="number" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="reminderTime"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Reminder time <Label className="text-slate-500">(optional)</Label></FormLabel>
-              <FormControl>
-                <Input type="number" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <div className="flex gap-4">
+          <FormField
+            control={form.control}
+            name="goalInSeconds"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel>Goal in seconds <Label className="text-slate-500">(optional)</Label></FormLabel>
+                <FormControl>
+                  <Input type="number" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="reminderTime"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel>Reminder time <Label className="text-slate-500">(optional)</Label></FormLabel>
+                <FormControl>
+                  <Input type="number" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
         <FormField
           control={form.control}
           name="daysToPractice"
