@@ -6,6 +6,7 @@ import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
 import { Button } from "~/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { skills } from "~/server/db/schema";
+import { SkillForm } from "./_components/SkillForm";
 
 const mockSkills: InferSelectModel<typeof skills>[] = [
   {
@@ -231,6 +232,12 @@ export default async function Page() {
           </CardContent>
         </Card>
       </div>
+
+      <SkillForm
+        //setOpen={() => { }}
+        isLoading={false}
+        // onSubmit={async (values) => { }}
+      />
     </div>
   );
 }
