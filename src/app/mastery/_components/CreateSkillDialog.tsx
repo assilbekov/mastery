@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react"
 import { Button } from "~/components/ui/button"
 import {
   Dialog,
@@ -9,13 +10,15 @@ import {
   DialogTrigger,
 } from "~/components/ui/dialog"
 import { SkillForm } from "./SkillForm"
-import type { SkillFormProps } from "./SkillForm"
-import { useState } from "react"
+import { api } from "~/trpc/react"
 
-type CreateSkillDialogProps = Omit<SkillFormProps, "setOpen">;
-
-export function CreateSkillDialog(props: CreateSkillDialogProps) {
+export function CreateSkillDialog() {
+  const utils = api.useUtils();
   const [open, setOpen] = useState(false);
+  const { mutateAsync, isLoading } = api.skill.create.useMutation({
+    onSuccess: () => utils.skill.getAllByUserId.invalidate(),
+  });
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -25,7 +28,11 @@ export function CreateSkillDialog(props: CreateSkillDialogProps) {
         <DialogHeader>
           <DialogTitle>Create a skill to master</DialogTitle>
         </DialogHeader>
-        <SkillForm setOpen={setOpen} {...props} />
+        <SkillForm
+          setOpen={setOpen}
+          onSubmit={async values => mutateAsync({ ...values, color: "", icon: "" })}
+          isLoading={isLoading}
+        />
       </DialogContent>
     </Dialog>
   )

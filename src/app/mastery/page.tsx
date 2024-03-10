@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
 import { Button } from "~/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
+import { CreateSkillDialog } from "./_components/CreateSkillDialog";
 
 /* const mockSkills: InferSelectModel<typeof skills>[] = [
   {
@@ -97,6 +98,7 @@ export default async function Page() {
     <div>
       <div className="flex justify-between">
         <h3 className="text-2xl font-semibold">Skills</h3>
+        <CreateSkillDialog />
         <Button size="sm">
           Create Skill
         </Button>
