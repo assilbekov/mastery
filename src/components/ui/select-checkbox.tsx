@@ -83,7 +83,7 @@ export function SelectCheckbox({
         <Command>
           <CommandInput placeholder={title} />
           <CommandList>
-            <CommandEmpty>No results found.</CommandEmpty>
+            {/* <CommandEmpty>No results found.</CommandEmpty> */}
             <CommandGroup>
               {options.map((option) => {
                 const isSelected = value.includes(option.value)

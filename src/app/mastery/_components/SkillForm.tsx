@@ -1,9 +1,11 @@
 "use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
-import { format } from "date-fns"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+import TimePicker from 'react-time-picker';
+import 'react-time-picker/dist/TimePicker.css';
+import 'react-clock/dist/Clock.css';
 
 import { Button } from "~/components/ui/button"
 import {
@@ -95,7 +97,7 @@ export const skillFormSchema = z.object({
   icon: z.string({ required_error: "Please select an icon" }),
   description: z.string().optional(),
   goalInSeconds: z.number().int().positive().optional(),
-  reminderTime: z.number().int().positive().optional(),
+  reminderTime: z.string().optional(),
   daysToPractice: z.array(z.string()).optional(),
 })
 
@@ -221,7 +223,12 @@ export function SkillForm({ setOpen, onSubmit, isLoading, defaultValues }: Skill
               <FormItem className="w-full">
                 <FormLabel>Reminder time <Label className="text-slate-500">(optional)</Label></FormLabel>
                 <FormControl>
-                  <Input type="number" {...field} />
+                  <TimePicker
+                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    onChange={field.onChange}
+                    value={field.value}
+                    disableClock
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
