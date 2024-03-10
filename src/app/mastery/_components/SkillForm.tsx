@@ -130,14 +130,13 @@ export const skillFormSchema = z.object({
 export type FinanceFormInfered = z.infer<typeof skillFormSchema>
 
 export type SkillFormProps = {
-  //setOpen: Dispatch<SetStateAction<boolean>>;
-  //setOpen: () => void;
+  setOpen: Dispatch<SetStateAction<boolean>>;
   isLoading: boolean;
-  //onSubmit: (values: z.infer<typeof skillFormSchema>) => Promise<void>;
+  onSubmit: (values: z.infer<typeof skillFormSchema>) => Promise<void>;
   defaultValues?: Partial<FinanceFormInfered>;
 }
 
-export function SkillForm({ isLoading, defaultValues }: SkillFormProps) {
+export function SkillForm({ setOpen, onSubmit, isLoading, defaultValues }: SkillFormProps) {
   // 1. Define your form.
   const form = useForm<FinanceFormInfered>({
     resolver: zodResolver(skillFormSchema),
@@ -146,8 +145,8 @@ export function SkillForm({ isLoading, defaultValues }: SkillFormProps) {
 
   // 2. Define a submit handler.
   async function _onSubmit(values: z.infer<typeof skillFormSchema>) {
-    // await onSubmit(values)
-    //setOpen(false);
+    await onSubmit(values)
+    setOpen(false);
   }
 
   return (
@@ -168,134 +167,115 @@ export function SkillForm({ isLoading, defaultValues }: SkillFormProps) {
         />
         <FormField
           control={form.control}
-          name="type"
+          name="color"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Type</FormLabel>
+              <FormLabel>Color</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Flow Type" />
+                    <SelectValue placeholder="Color" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="income">Income</SelectItem>
-                  <SelectItem value="expense">Expense</SelectItem>
+                  {colors.map((color) => (
+                    <SelectItem key={color} value={color}>
+                      <div className={cn("w-4 h-4 rounded-full", color)} />
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
               <FormMessage />
             </FormItem>
           )}
         />
-        <div className="flex gap-4">
-          <FormField
-            control={form.control}
-            name="monthlyAmount"
-            render={({ field }) => (
-              <FormItem className="w-[195px]">
-                <FormLabel>Monthly Amount</FormLabel>
+        <FormField
+          control={form.control}
+          name="icon"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Icon</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
-                  <Input type="number" {...field} />
+                  <SelectTrigger>
+                    <SelectValue placeholder="Icon" />
+                  </SelectTrigger>
                 </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="interestRate"
-            render={({ field }) => (
-              <FormItem className="w-[195px]">
-                <FormLabel>Interest Rate (%)</FormLabel>
+                <SelectContent>
+                  {icons.map((icon) => (
+                    <SelectItem key={icon} value={icon}>
+                      <div className="w-4 h-4">{icon}</div>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="description"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Description <Label className="text-slate-500">(optional)</Label></FormLabel>
+              <FormControl>
+                <Input placeholder="Description" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="goalInSeconds"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Goal in seconds <Label className="text-slate-500">(optional)</Label></FormLabel>
+              <FormControl>
+                <Input type="number" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="reminderTime"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Reminder time <Label className="text-slate-500">(optional)</Label></FormLabel>
+              <FormControl>
+                <Input type="number" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="daysToPractice"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Days to practice <Label className="text-slate-500">(optional)</Label></FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value as any}>
                 <FormControl>
-                  <Input type="number" {...field} />
+                  <SelectTrigger>
+                    <SelectValue placeholder="Days to practice" />
+                  </SelectTrigger>
                 </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-        <div className="flex gap-4">
-          <FormField
-            control={form.control}
-            name="startDate"
-            render={({ field }) => (
-              <FormItem className="flex flex-col">
-                <FormLabel>Start date</FormLabel>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <FormControl>
-                      <Button
-                        variant={"outline"}
-                        className={cn(
-                          "w-[195px] pl-3 text-left font-normal",
-                          !field.value && "text-muted-foreground"
-                        )}
-                      >
-                        {field.value ? (
-                          format(field.value, "PPP")
-                        ) : (
-                          <span>Pick a date</span>
-                        )}
-                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                      </Button>
-                    </FormControl>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0" align="start">
-                    <Calendar
-                      mode="single"
-                      selected={field.value}
-                      onSelect={field.onChange}
-                      disabled={(date) => date < new Date("1900-01-01")}
-                      initialFocus
-                    />
-                  </PopoverContent>
-                </Popover>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="endDate"
-            render={({ field }) => (
-              <FormItem className="flex flex-col">
-                <FormLabel>End data <Label className="text-slate-500">(optional)</Label></FormLabel>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <FormControl>
-                      <Button
-                        variant={"outline"}
-                        className={cn(
-                          "w-[195px] pl-3 text-left font-normal",
-                          !field.value && "text-muted-foreground"
-                        )}
-                      >
-                        {field.value ? (
-                          format(field.value, "PPP")
-                        ) : (
-                          <span>Pick a date</span>
-                        )}
-                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                      </Button>
-                    </FormControl>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0" align="start">
-                    <Calendar
-                      mode="single"
-                      selected={field.value}
-                      onSelect={field.onChange}
-                      disabled={(date) => date < new Date("1900-01-01")}
-                      initialFocus
-                    />
-                  </PopoverContent>
-                </Popover>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
+                <SelectContent>
+                  {daysToPractice.map((day) => (
+                    <SelectItem key={day} value={day}>
+                      {day}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <div className="flex justify-end">
           <Button disabled={isLoading} type="submit">Submit</Button>
         </div>
