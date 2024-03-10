@@ -96,7 +96,7 @@ export const skillFormSchema = z.object({
   color: z.string({ required_error: "Please select a color" }),
   icon: z.string({ required_error: "Please select an icon" }),
   description: z.string().optional(),
-  goalInSeconds: z.number().int().positive().optional(),
+  goalInHours: z.number().int().positive().optional(),
   reminderTime: z.string().optional(),
   daysToPractice: z.array(z.string()).optional(),
 })
@@ -205,7 +205,7 @@ export function SkillForm({ setOpen, onSubmit, isLoading, defaultValues }: Skill
         <div className="flex gap-4">
           <FormField
             control={form.control}
-            name="goalInSeconds"
+            name="goalInHours"
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormLabel>Goal in seconds <Label className="text-slate-500">(optional)</Label></FormLabel>

@@ -10,7 +10,7 @@ export const skillFormSchema = z.object({
   color: z.string(),
   icon: z.string(),
   description: z.string().optional(),
-  goalInSeconds: z.number().int().positive().optional(),
+  goalInHours: z.number().int().positive().optional(),
   reminderTime: z.number().int().positive().optional(),
   daysToPractice: z.array(z.string()).optional(),
 })
