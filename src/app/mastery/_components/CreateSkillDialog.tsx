@@ -30,7 +30,7 @@ export function CreateSkillDialog() {
         </DialogHeader>
         <SkillForm
           setOpen={setOpen}
-          onSubmit={async values => mutateAsync({ ...values, color: "", icon: "" })}
+          onSubmit={mutateAsync}
           isLoading={isLoading}
           defaultValues={{
             name: "",
