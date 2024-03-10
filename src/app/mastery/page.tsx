@@ -92,8 +92,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 
 export default async function Page() {
   noStore();
-  /* const hello = await api.post.hello.query({ text: "from tRPC" });
-  const session = await getServerAuthSession(); */
 
   return (
     <div>
