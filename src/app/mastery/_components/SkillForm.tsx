@@ -93,6 +93,26 @@ const icons = [
   "x",
   "yin-yang",
   "z",
+];
+
+const frequencies = [
+  "daily",
+  "weekly",
+  "bi-weekly",
+  "monthly",
+  "quarterly",
+  "semi-annually",
+  "annually",
+]
+
+const daysToPractice = [
+  "monday",
+  "tuesday",
+  "wednesday",
+  "thursday",
+  "friday",
+  "saturday",
+  "sunday",
 ]
 
 export const skillFormSchema = z.object({
@@ -100,10 +120,11 @@ export const skillFormSchema = z.object({
     message: "Name is required.",
   }),
   color: z.enum(colors as any, { required_error: "Please select a color" }),
-  monthlyAmount: z.coerce.number().min(1, { message: "Amount must be at least 1" }),
-  interestRate: z.coerce.number().min(0, { message: "Interest rate must be at least 0" }),
-  startDate: z.date(),
-  endDate: z.date().optional(),
+  icon: z.enum(icons as any, { required_error: "Please select an icon" }),
+  description: z.string().optional(),
+  goalInSeconds: z.number().int().positive().optional(),
+  reminderTime: z.number().int().positive().optional(),
+  daysToPractice: z.array(z.enum(daysToPractice as any)).optional(),
 })
 
 export type FinanceFormInfered = z.infer<typeof skillFormSchema>
