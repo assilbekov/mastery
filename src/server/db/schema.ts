@@ -39,6 +39,10 @@ export const skills = createTable(
     userId: varchar("user_id").notNull(),
     color: varchar("color").notNull(),
     icon: varchar("icon").notNull(),
+    description: varchar("description", { length: 256 }),
+    goalInSeconds: real("goal_in_seconds"),
+    reminderTime: real("reminder"),
+    daysToPractice: real("days_to_practice"),
     createdAt: timestamp("created_at")
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
