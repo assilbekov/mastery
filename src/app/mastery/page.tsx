@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { skills } from "~/server/db/schema";
 import { SkillForm } from "./_components/SkillForm";
 
-const mockSkills: InferSelectModel<typeof skills>[] = [
+/* const mockSkills: InferSelectModel<typeof skills>[] = [
   {
     id: 1,
     name: "Design",
@@ -90,7 +90,7 @@ const mockSkills: InferSelectModel<typeof skills>[] = [
     createdAt: new Date(),
     updatedAt: new Date(),
   },
-]
+] */
 
 export default async function Page() {
   noStore();
@@ -113,7 +113,7 @@ export default async function Page() {
         </AlertDescription>
       </Alert>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        {mockSkills.map((skill) => (
+        {/* {mockSkills.map((skill) => (
           <Card>
             <CardHeader>
               <CardTitle>{skill.name}</CardTitle>
@@ -129,7 +129,7 @@ export default async function Page() {
               </div>
             </CardContent>
           </Card>
-        ))}
+        ))} */}
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">
