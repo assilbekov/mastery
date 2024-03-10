@@ -57,6 +57,7 @@ export const timeBlocks = createTable(
   "time_block",
   {
     id: serial("id").primaryKey(),
+    userId: varchar("user_id").notNull(),
     skillId: real("skill_id").notNull().references(() => skills.id),
     timeInSeconds: real("time_in_seconds").notNull(),
     comment: varchar("comment", { length: 256 }),
