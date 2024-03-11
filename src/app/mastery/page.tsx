@@ -8,9 +8,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { CreateSkillDialog } from "./_components/CreateSkillDialog";
 import 'react-time-picker/dist/TimePicker.css';
 import 'react-clock/dist/Clock.css';
+import { api } from "~/trpc/server";
+import { SkillCard } from "./_components/SkillCard";
 
 export default async function Page() {
   noStore();
+
+  const skills = await api.skill.getAllByUserId.query();
 
   return (
     <div>
@@ -26,7 +30,10 @@ export default async function Page() {
         </AlertDescription>
       </Alert>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        {/* {mockSkills.map((skill) => (
+        {skills.map(skill => (
+          <SkillCard key={skill.id} skill={skill} totalHours={56.356} />
+        ))}
+        {skills.map((skill) => (
           <Card>
             <CardHeader>
               <CardTitle>{skill.name}</CardTitle>
@@ -42,7 +49,7 @@ export default async function Page() {
               </div>
             </CardContent>
           </Card>
-        ))} */}
+        ))}
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">

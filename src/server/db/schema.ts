@@ -25,9 +25,9 @@ export const skills = createTable(
     color: varchar("color").notNull(),
     icon: varchar("icon").notNull(),
     description: varchar("description", { length: 256 }),
-    goalInHours: real("goal_in_hours"),
-    reminderTime: varchar("reminder"),
-    daysToPractice: varchar("days_to_practice", { length: 256 }),
+    goalInHours: real("goal_in_hours").notNull(),
+    reminderTime: varchar("reminder").notNull(),
+    daysToPractice: varchar("days_to_practice", { length: 256 }).notNull(),
     createdAt: timestamp("created_at")
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
