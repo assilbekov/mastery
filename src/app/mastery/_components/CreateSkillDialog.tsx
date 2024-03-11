@@ -22,7 +22,7 @@ export function CreateSkillDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button onClick={() => setOpen(true)}>Create Skill</Button>
+        <Button onClick={() => setOpen(true)} size="sm">Create Skill</Button>
       </DialogTrigger>
       <DialogContent className="max-w-md">
         <DialogHeader>
