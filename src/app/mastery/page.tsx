@@ -9,90 +9,6 @@ import { CreateSkillDialog } from "./_components/CreateSkillDialog";
 import 'react-time-picker/dist/TimePicker.css';
 import 'react-clock/dist/Clock.css';
 
-/* const mockSkills: InferSelectModel<typeof skills>[] = [
-  {
-    id: 1,
-    name: "Design",
-    userId: "1",
-    color: "bg-blue-500",
-    icon: "apple",
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  {
-    id: 2,
-    name: "Development",
-    userId: "1",
-    color: "bg-green-500",
-    icon: "alarm-clock",
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  {
-    id: 3,
-    name: "Marketing",
-    userId: "1",
-    color: "bg-pink-500",
-    icon: "bug",
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  {
-    id: 4,
-    name: "Sales",
-    userId: "1",
-    color: "bg-yellow-500",
-    icon: "cannabis",
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  {
-    id: 5,
-    name: "Customer Support",
-    userId: "1",
-    color: "bg-red-500",
-    icon: "dollar-sign",
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  {
-    id: 6,
-    name: "Human Resources",
-    userId: "1",
-    color: "bg-indigo-500",
-    icon: "git-pull-request",
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  {
-    id: 7,
-    name: "Finance",
-    userId: "1",
-    color: "bg-purple-500",
-    icon: "landmark",
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  {
-    id: 8,
-    name: "Operations",
-    userId: "1",
-    color: "bg-gray-500",
-    icon: "loader",
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  {
-    id: 9,
-    name: "Legal",
-    userId: "1",
-    color: "bg-yellow-500",
-    icon: "person-standing",
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-] */
-
 export default async function Page() {
   noStore();
 
@@ -101,9 +17,6 @@ export default async function Page() {
       <div className="flex justify-between">
         <h3 className="text-2xl font-semibold">Skills</h3>
         <CreateSkillDialog />
-        <Button size="sm">
-          Create Skill
-        </Button>
       </div>
       <Alert>
         <RocketIcon className="h-4 w-4" />
