@@ -16,6 +16,7 @@ import {
 import { api } from "~/trpc/react";
 import { useState } from "react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "~/components/ui/dropdown-menu";
+import { TimerDialog } from "./TimerDialog";
 
 type SkillCardProps = {
   skill: InferSelectModel<typeof skills>;
@@ -57,10 +58,16 @@ const SkillDropdown = ({
 }: SkillCardProps & {
   onTrackClick: () => void;
   onEditClick: () => void;
-  onDeleteClick: () => void;
+  onDeleteClick: () => Promise<void>;
   deleteIsLoading: boolean;
 }) => {
   const [open, setOpen] = useState(false);
+
+  const handleDelete = async () => {
+    await onDeleteClick();
+    setOpen(false);
+  }
+
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger>
@@ -72,7 +79,7 @@ const SkillDropdown = ({
         <DropdownMenuItem
           className="text-white bg-red-500 hover:bg-red-600 focus:bg-red-600 active:text-white hover:text-white focus:text-white mt-1"
           disabled={deleteIsLoading}
-          onClick={onDeleteClick}
+          onClick={handleDelete}
         >Delete</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
@@ -82,60 +89,44 @@ const SkillDropdown = ({
 export const SkillCard = ({ skill, totalHours }: SkillCardProps) => {
   const utils = api.useUtils();
   const [open, setOpen] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
+  const [trackOpen, setTrackOpen] = useState(false);
   const { mutateAsync, isLoading } = api.skill.update.useMutation({
+    onSuccess: () => utils.skill.getAllByUserId.invalidate(),
+  });
+  const { mutateAsync: deleteAsyncSkill, isLoading: deleteIsLoading } = api.skill.delete.useMutation({
     onSuccess: () => utils.skill.getAllByUserId.invalidate(),
   });
 
   return (
     <>
-    <SkillDropdown 
-      skill={skill}
-      totalHours={totalHours}
-      onTrackClick={() => setOpen(true)}
-      onEditClick={() => setOpen(true)}
-      onDeleteClick={() => setOpen(true)}
-      deleteIsLoading
-    />
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent className="max-w-md">
-        <DialogHeader>
-          <DialogTitle>Create a skill to master</DialogTitle>
-        </DialogHeader>
-        <SkillForm
-          setOpen={setOpen}
-          onSubmit={async value => await mutateAsync({ ...value, id: skill.id })}
-          isLoading={isLoading}
-          defaultValues={{
-            ...skill,
-            description: skill.description ?? undefined,
-            daysToPractice: skill.daysToPractice.split(","),
-          }}
-        />
-      </DialogContent>
-    </Dialog>
-    </>
-  )
+      <SkillDropdown
+        skill={skill}
+        totalHours={totalHours}
+        onTrackClick={() => setTrackOpen(true)}
+        onEditClick={() => setEditOpen(true)}
+        onDeleteClick={async () => await deleteAsyncSkill({id: skill.id})}
+        deleteIsLoading={deleteIsLoading}
+      />
 
-  return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <SkillCardInfo onCardClick={() => setOpen(true)} skill={skill} totalHours={totalHours} />
-      </DialogTrigger>
-      <DialogContent className="max-w-md">
-        <DialogHeader>
-          <DialogTitle>Create a skill to master</DialogTitle>
-        </DialogHeader>
-        <SkillForm
-          setOpen={setOpen}
-          onSubmit={async value => await mutateAsync({ ...value, id: skill.id })}
-          isLoading={isLoading}
-          defaultValues={{
-            ...skill,
-            description: skill.description ?? undefined,
-            daysToPractice: skill.daysToPractice.split(","),
-          }}
-        />
-      </DialogContent>
-    </Dialog>
+      <TimerDialog open={trackOpen} skill={skill} setOpen={setTrackOpen} />
+      <Dialog open={editOpen} onOpenChange={setEditOpen}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle>Edit skill</DialogTitle>
+          </DialogHeader>
+          <SkillForm
+            setOpen={setOpen}
+            onSubmit={async value => await mutateAsync({ ...value, id: skill.id })}
+            isLoading={isLoading}
+            defaultValues={{
+              ...skill,
+              description: skill.description ?? undefined,
+              daysToPractice: skill.daysToPractice.split(","),
+            }}
+          />
+        </DialogContent>
+      </Dialog>
+    </>
   )
 }

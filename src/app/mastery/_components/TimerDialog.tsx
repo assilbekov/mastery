@@ -10,7 +10,6 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
-  DrawerTrigger,
 } from "~/components/ui/drawer"
 import { api } from "~/trpc/react"
 import { Timer } from "./Timer"
@@ -51,9 +50,6 @@ export function TimerDialog({ skill, open, setOpen }: TimerDialogProps) {
 
   return (
     <Drawer open={open} onClose={() => setOpen(true)}>
-      <DrawerTrigger asChild>
-        <Button variant="outline">Open Drawer</Button>
-      </DrawerTrigger>
       <DrawerContent>
         <div className="mx-auto w-full max-w-sm">
           <DrawerHeader>
