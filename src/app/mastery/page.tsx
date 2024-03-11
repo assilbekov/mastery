@@ -23,7 +23,7 @@ export default async function Page() {
 
   return (
     <div>
-      <div className="flex justify-between">
+      <div className="flex justify-between items-center px-4 py-3">
         <h3 className="text-2xl font-semibold">Skills</h3>
         <CreateSkillDialog />
       </div>
