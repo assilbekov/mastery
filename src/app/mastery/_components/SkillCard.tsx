@@ -88,7 +88,6 @@ const SkillDropdown = ({
 
 export const SkillCard = ({ skill, totalHours }: SkillCardProps) => {
   const utils = api.useUtils();
-  const [open, setOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
   const [trackOpen, setTrackOpen] = useState(false);
   const { mutateAsync, isLoading } = api.skill.update.useMutation({
@@ -116,7 +115,7 @@ export const SkillCard = ({ skill, totalHours }: SkillCardProps) => {
             <DialogTitle>Edit skill</DialogTitle>
           </DialogHeader>
           <SkillForm
-            setOpen={setOpen}
+            setOpen={setEditOpen}
             onSubmit={async value => await mutateAsync({ ...value, id: skill.id })}
             isLoading={isLoading}
             defaultValues={{
