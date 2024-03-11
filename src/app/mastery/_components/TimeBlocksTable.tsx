@@ -27,7 +27,6 @@ import {
 
 import { DataTablePagination } from "./DataTablePagination"
 import { DataTableToolbar } from "./DataTableToolbar"
-import { api } from "~/trpc/react";
 
 
 type TimeBlocksTableProps = {
