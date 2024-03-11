@@ -6,6 +6,8 @@ import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
 import { Button } from "~/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { CreateSkillDialog } from "./_components/CreateSkillDialog";
+import 'react-time-picker/dist/TimePicker.css';
+import 'react-clock/dist/Clock.css';
 
 /* const mockSkills: InferSelectModel<typeof skills>[] = [
   {

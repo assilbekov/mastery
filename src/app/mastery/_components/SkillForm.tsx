@@ -4,8 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import TimePicker from 'react-time-picker';
-import 'react-time-picker/dist/TimePicker.css';
-import 'react-clock/dist/Clock.css';
 
 import { Button } from "~/components/ui/button"
 import {
@@ -17,11 +15,8 @@ import {
   FormMessage,
 } from "~/components/ui/form"
 import { Input } from "~/components/ui/input"
-import { Popover, PopoverContent, PopoverTrigger } from "~/components/ui/popover"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/components/ui/select"
 import { cn } from "~/lib/utils"
-import { CalendarIcon } from "@radix-ui/react-icons"
-import { Calendar } from "~/components/ui/calendar"
 import { Label } from "~/components/ui/label"
 import type { Dispatch, SetStateAction } from "react"
 import { skillIcons } from "./SkillIcons"
@@ -46,16 +41,6 @@ const colors: string[] = [
   "bg-gray-500",
   "bg-teal-500",
   "bg-fuchsia-500",
-]
-
-const daysToPractice = [
-  "monday",
-  "tuesday",
-  "wednesday",
-  "thursday",
-  "friday",
-  "saturday",
-  "sunday",
 ]
 
 const daysToPracticeOptions = [
@@ -208,7 +193,7 @@ export function SkillForm({ setOpen, onSubmit, isLoading, defaultValues }: Skill
             name="goalInHours"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel>Goal in seconds <Label className="text-slate-500">(optional)</Label></FormLabel>
+                <FormLabel>Goal in seconds</FormLabel>
                 <FormControl>
                   <Input type="number" {...field} />
                 </FormControl>
@@ -221,7 +206,7 @@ export function SkillForm({ setOpen, onSubmit, isLoading, defaultValues }: Skill
             name="reminderTime"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel>Reminder time <Label className="text-slate-500">(optional)</Label></FormLabel>
+                <FormLabel>Reminder time</FormLabel>
                 <FormControl>
                   <TimePicker
                     className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
