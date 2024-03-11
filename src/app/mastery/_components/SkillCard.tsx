@@ -1,9 +1,9 @@
 "use client"
 
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "~/components/ui/card";
 import { SkillForm } from "./SkillForm";
-import { InferSelectModel } from "drizzle-orm";
-import { skills } from "~/server/db/schema";
+import type { InferSelectModel } from "drizzle-orm";
+import type { skills } from "~/server/db/schema";
 import { skillIcons } from "./SkillIcons";
 import { Progress } from "~/components/ui/progress";
 import {
@@ -11,7 +11,6 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "~/components/ui/dialog"
 import { api } from "~/trpc/react";
 import { useState } from "react";
