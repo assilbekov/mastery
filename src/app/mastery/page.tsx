@@ -11,6 +11,7 @@ import 'react-clock/dist/Clock.css';
 import { api } from "~/trpc/server";
 import { SkillCard } from "./_components/SkillCard";
 import { Skills } from "./_components/Skills";
+import { Timer } from "./_components/Timer";
 
 export default async function Page() {
   noStore();
@@ -31,6 +32,7 @@ export default async function Page() {
         </AlertDescription>
       </Alert>
       <Skills initialSkills={skills} />
+      <Timer />
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         {skills.map(skill => (
           <SkillCard key={skill.id} skill={skill} totalHours={56.356} />
