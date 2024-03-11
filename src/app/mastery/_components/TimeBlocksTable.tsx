@@ -1,7 +1,7 @@
 "use client"
 
 import type { InferSelectModel } from "drizzle-orm"
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import type { ColumnFiltersState, SortingState, VisibilityState } from "@tanstack/react-table"
 import {
   flexRender,
@@ -13,7 +13,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
-import type { timeBlocks as timeBlocksSchema } from "~/server/db/schema"
+import type { timeBlocks as timeBlocksSchema, skills as skillsSchema } from "~/server/db/schema"
 import { timeBlocksColumns } from "./timeBlocksColumns";
 
 import {
@@ -31,17 +31,25 @@ import { api } from "~/trpc/react";
 
 
 type TimeBlocksTableProps = {
+  skills: InferSelectModel<typeof skillsSchema>[];
   timeBlocks: InferSelectModel<typeof timeBlocksSchema>[];
 }
 
-export const TimeBlocksTable = ({ timeBlocks }: TimeBlocksTableProps) => {
+export const TimeBlocksTable = ({ skills, timeBlocks }: TimeBlocksTableProps) => {
   const [rowSelection, setRowSelection] = useState({})
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
 
+  const data = useMemo(() => {
+    return timeBlocks.map(timeBlock => ({ 
+      ...timeBlock, 
+      skill: skills.find(skill => skill.id === timeBlock.skillId)
+    }))
+  }, [timeBlocks, skills])
+
   const table = useReactTable({
-    data: timeBlocks,
+    data,
     columns: timeBlocksColumns,
     state: {
       sorting,

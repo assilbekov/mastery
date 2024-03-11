@@ -3,19 +3,31 @@
 import type { ColumnDef } from "@tanstack/react-table"
 import type { InferSelectModel } from "drizzle-orm"
 
-import type { timeBlocks } from "~/server/db/schema"
+import type { timeBlocks, skills } from "~/server/db/schema"
 import { DataTableColumnHeader } from "./DataTableColumnHeader"
 import { formatDate } from "~/lib/utils";
 import { TimeBlockActions } from "./TimeBlockActions"
 import { Label } from "~/components/ui/label"
+import { skillIcons } from "./SkillIcons"
 
 export const timeBlocksColumns: ColumnDef<InferSelectModel<typeof timeBlocks>>[] = [
   {
-    accessorKey: "name",
+    accessorKey: "skill",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Name" />
     ),
-    cell: ({ row }) => <div className="flex space-x-2">{row.getValue("skillId")}</div>,
+    cell: ({ row }) => {
+      const skill: InferSelectModel<typeof skills> = row.getValue("skill");
+      const icon = skillIcons.find((icon) => icon.name === skill.icon);
+      return (
+        <div className="flex space-x-2 items-center">
+          <div className={`w-6 h-6 rounded-full ${skill.color} flex justify-center items-center mr-2`}>
+            {icon && <icon.Icon color="white" width={16} height={16} />}
+          </div>
+          {skill.name}
+        </div>
+      )
+    },
     enableHiding: false,
   },
   {
