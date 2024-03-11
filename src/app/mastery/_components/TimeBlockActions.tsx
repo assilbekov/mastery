@@ -11,8 +11,8 @@ import {
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu"
 import { api } from "~/trpc/react"
-import { InferSelectModel } from "drizzle-orm"
-import { timeBlocks } from "~/server/db/schema"
+import type { InferSelectModel } from "drizzle-orm"
+import type { timeBlocks } from "~/server/db/schema"
 
 interface TimeBlockActionsProps {
   row: Row<InferSelectModel<typeof timeBlocks>>
