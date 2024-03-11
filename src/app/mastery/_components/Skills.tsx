@@ -23,7 +23,7 @@ export const Skills = ({ initialSkills, initialTimeBlocks }: SkillsProps) => {
         ))}
       </div>
 
-      <TimeBlocksTable initialTimeBlocks={initialTimeBlocks} />
+      <TimeBlocksTable timeBlocks={timeBlocks} />
     </div>
   )
 }

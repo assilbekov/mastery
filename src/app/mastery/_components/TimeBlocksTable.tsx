@@ -31,19 +31,17 @@ import { api } from "~/trpc/react";
 
 
 type TimeBlocksTableProps = {
-  initialTimeBlocks: InferSelectModel<typeof timeBlocksSchema>[];
+  timeBlocks: InferSelectModel<typeof timeBlocksSchema>[];
 }
 
-export const TimeBlocksTable = ({ initialTimeBlocks }: TimeBlocksTableProps) => {
-  const { data } = api.timeBlock.getAllByUserId.useQuery(undefined, { initialData: initialTimeBlocks });
-
+export const TimeBlocksTable = ({ timeBlocks }: TimeBlocksTableProps) => {
   const [rowSelection, setRowSelection] = useState({})
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
 
   const table = useReactTable({
-    data,
+    data: timeBlocks,
     columns: timeBlocksColumns,
     state: {
       sorting,
