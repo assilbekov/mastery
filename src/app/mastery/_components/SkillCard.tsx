@@ -15,6 +15,7 @@ import {
 } from "~/components/ui/dialog"
 import { api } from "~/trpc/react";
 import { useState } from "react";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "~/components/ui/dropdown-menu";
 
 type SkillCardProps = {
   skill: InferSelectModel<typeof skills>;
@@ -46,12 +47,74 @@ const SkillCardInfo = ({ skill, totalHours, onCardClick }: SkillCardProps & { on
   )
 }
 
+const SkillDropdown = ({
+  skill,
+  totalHours,
+  onTrackClick,
+  onEditClick,
+  onDeleteClick,
+  deleteIsLoading
+}: SkillCardProps & {
+  onTrackClick: () => void;
+  onEditClick: () => void;
+  onDeleteClick: () => void;
+  deleteIsLoading: boolean;
+}) => {
+  const [open, setOpen] = useState(false);
+  return (
+    <DropdownMenu open={open} onOpenChange={setOpen}>
+      <DropdownMenuTrigger>
+        <SkillCardInfo skill={skill} totalHours={totalHours} onCardClick={() => setOpen(true)} />
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuItem onClick={onTrackClick}>Track</DropdownMenuItem>
+        <DropdownMenuItem onClick={onEditClick}>Edit</DropdownMenuItem>
+        <DropdownMenuItem
+          className="text-white bg-red-500 hover:bg-red-600 focus:bg-red-600 active:text-white hover:text-white focus:text-white mt-1"
+          disabled={deleteIsLoading}
+          onClick={onDeleteClick}
+        >Delete</DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
+}
+
 export const SkillCard = ({ skill, totalHours }: SkillCardProps) => {
   const utils = api.useUtils();
   const [open, setOpen] = useState(false);
   const { mutateAsync, isLoading } = api.skill.update.useMutation({
     onSuccess: () => utils.skill.getAllByUserId.invalidate(),
   });
+
+  return (
+    <>
+    <SkillDropdown 
+      skill={skill}
+      totalHours={totalHours}
+      onTrackClick={() => setOpen(true)}
+      onEditClick={() => setOpen(true)}
+      onDeleteClick={() => setOpen(true)}
+      deleteIsLoading
+    />
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogContent className="max-w-md">
+        <DialogHeader>
+          <DialogTitle>Create a skill to master</DialogTitle>
+        </DialogHeader>
+        <SkillForm
+          setOpen={setOpen}
+          onSubmit={async value => await mutateAsync({ ...value, id: skill.id })}
+          isLoading={isLoading}
+          defaultValues={{
+            ...skill,
+            description: skill.description ?? undefined,
+            daysToPractice: skill.daysToPractice.split(","),
+          }}
+        />
+      </DialogContent>
+    </Dialog>
+    </>
+  )
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
