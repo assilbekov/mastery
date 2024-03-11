@@ -1,7 +1,7 @@
 import { sql } from "drizzle-orm";
 import {
-  index,
   pgTableCreator,
+  integer,
   serial,
   real,
   timestamp,
@@ -40,7 +40,7 @@ export const timeBlocks = createTable(
   {
     id: serial("id").primaryKey(),
     userId: varchar("user_id").notNull(),
-    skillId: real("skill_id").references(() => skills.id).notNull(),
+    skillId: integer("skill_id").references(() => skills.id),
     timeInSeconds: real("time_in_seconds").notNull(),
     comment: varchar("comment", { length: 256 }),
     createdAt: timestamp("created_at")
