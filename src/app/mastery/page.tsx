@@ -10,6 +10,7 @@ import 'react-time-picker/dist/TimePicker.css';
 import 'react-clock/dist/Clock.css';
 import { api } from "~/trpc/server";
 import { SkillCard } from "./_components/SkillCard";
+import { Skills } from "./_components/Skills";
 
 export default async function Page() {
   noStore();
@@ -29,6 +30,7 @@ export default async function Page() {
           You have nothing to track here. Create your first skill now.
         </AlertDescription>
       </Alert>
+      <Skills initialSkills={skills} />
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         {skills.map(skill => (
           <SkillCard key={skill.id} skill={skill} totalHours={56.356} />
