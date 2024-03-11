@@ -25,7 +25,7 @@ export const Skills = ({ initialSkills, initialTimeBlocks }: SkillsProps) => {
         <Label className="text-xl">Skills</Label>
         <CreateSkillDialog />
       </div>
-      {skills.length !== 0 ? (
+      {skills.length === 0 ? (
         <Alert>
           <RocketIcon className="h-4 w-4" />
           <AlertTitle>No skills created!</AlertTitle>
