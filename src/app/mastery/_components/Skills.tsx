@@ -1,19 +1,22 @@
 "use client"
 
 import { InferSelectModel } from "drizzle-orm";
-import { skills } from "~/server/db/schema";
+import { skills as skillsSchema, timeBlocks as timeBlocksSchema } from "~/server/db/schema";
 import { SkillCard } from "./SkillCard";
 import { api } from "~/trpc/react";
 
 type SkillsProps = {
-  initialSkills: InferSelectModel<typeof skills>[];
+  initialSkills: InferSelectModel<typeof skillsSchema>[];
+  initialTimeBlocks: InferSelectModel<typeof timeBlocksSchema>[];
 }
 
-export const Skills = ({ initialSkills }: SkillsProps) => {
-  const { data } = api.skill.getAllByUserId.useQuery(undefined, { initialData: initialSkills });
+export const Skills = ({ initialSkills, initialTimeBlocks }: SkillsProps) => {
+  const { data: skills } = api.skill.getAllByUserId.useQuery(undefined, { initialData: initialSkills });
+  const { data: timeBlocks } = api.timeBlock.getAllByUserId.useQuery(undefined, { initialData: initialTimeBlocks });
+
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-      {data.map(skill => (
+      {skills.map(skill => (
         <SkillCard key={skill.id} skill={skill} totalHours={63.2} />
       ))}
     </div>

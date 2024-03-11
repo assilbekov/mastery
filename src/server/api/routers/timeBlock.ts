@@ -18,9 +18,9 @@ export const timeBlockRouter = createTRPCRouter({
       if (!user) {
         throw new Error("User not found");
       }
-      return ctx.db.query.skills.findMany({
+      return ctx.db.query.timeBlocks.findMany({
         where: eq(timeBlocks.userId, user.id),
-        orderBy: (skills, { desc }) => [desc(skills.updatedAt)],
+        orderBy: (timeBlocks, { desc }) => [desc(timeBlocks.updatedAt)],
       });
     }),
 

@@ -16,7 +16,10 @@ import { Timer } from "./_components/Timer";
 export default async function Page() {
   noStore();
 
-  const skills = await api.skill.getAllByUserId.query();
+  const [skills, timeBlocks] = await Promise.all([
+    api.skill.getAllByUserId.query(),
+    api.timeBlock.getAllByUserId.query(),
+  ]);
 
   return (
     <div>
@@ -31,7 +34,7 @@ export default async function Page() {
           You have nothing to track here. Create your first skill now.
         </AlertDescription>
       </Alert>
-      <Skills initialSkills={skills} />
+      <Skills initialSkills={skills} initialTimeBlocks={timeBlocks} />
       <Timer />
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         {skills.map(skill => (
