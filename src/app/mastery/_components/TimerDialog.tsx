@@ -14,8 +14,8 @@ import {
 import { api } from "~/trpc/react"
 import { Timer } from "./Timer"
 import { Input } from "~/components/ui/input"
-import { InferSelectModel } from "drizzle-orm"
-import { skills } from "~/server/db/schema"
+import type { InferSelectModel } from "drizzle-orm"
+import type { skills } from "~/server/db/schema"
 
 type TimerDialogProps = {
   open: boolean;
