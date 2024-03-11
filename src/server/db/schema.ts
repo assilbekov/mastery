@@ -32,10 +32,7 @@ export const skills = createTable(
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
     updatedAt: timestamp("updatedAt"),
-  },
-  (example) => ({
-    nameIndex: index("skill_id").on(example.name),
-  })
+  }
 );
 
 export const timeBlocks = createTable(
@@ -43,15 +40,12 @@ export const timeBlocks = createTable(
   {
     id: serial("id").primaryKey(),
     userId: varchar("user_id").notNull(),
-    skillId: real("skill_id").notNull().references(() => skills.id),
+    skillId: real("skill_id").references(() => skills.id).notNull(),
     timeInSeconds: real("time_in_seconds").notNull(),
     comment: varchar("comment", { length: 256 }),
     createdAt: timestamp("created_at")
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
     updatedAt: timestamp("updatedAt"),
-  },
-  (example) => ({
-    skillIdIndex: index("skill_idx").on(example.skillId),
-  })
+  }
 );
