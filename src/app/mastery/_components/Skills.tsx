@@ -1,7 +1,7 @@
 "use client"
 
-import { InferSelectModel } from "drizzle-orm";
-import { skills as skillsSchema, timeBlocks as timeBlocksSchema } from "~/server/db/schema";
+import type { InferSelectModel } from "drizzle-orm";
+import type { skills as skillsSchema, timeBlocks as timeBlocksSchema } from "~/server/db/schema";
 import { SkillCard } from "./SkillCard";
 import { api } from "~/trpc/react";
 import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
