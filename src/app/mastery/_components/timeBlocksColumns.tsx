@@ -29,7 +29,7 @@ export const timeBlocksColumns: ColumnDef<InferSelectModel<typeof timeBlocks>>[]
       const minutes = Math.floor(timeInSeconds / 60) % 60;
       const hours = Math.floor(timeInSeconds / 3600) % 24;
       return (
-        <Label className="text-xl">
+        <Label>
           {hours.toString().padStart(2, '0')}:{minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}
         </Label>
       )
