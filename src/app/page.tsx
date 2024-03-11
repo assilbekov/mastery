@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import Image from "next/image";
-import { Container } from "~/components/ui/renamed";
+import { Container } from "~/components/ui/container";
 import { Button } from "~/components/ui/button";
 
 import { Label } from "~/components/ui/label";
