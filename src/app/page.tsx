@@ -1,59 +1,60 @@
-import { unstable_noStore as noStore } from "next/cache";
+import type { Metadata } from "next"
+import Image from "next/image";
+import { Container } from "~/components/ui/container";
+import { Button } from "~/components/ui/button";
+
+import { Label } from "~/components/ui/label";
 import Link from "next/link";
 
-export default async function Home() {
-  noStore();
+export const metadata: Metadata = {
+  title: "Master Your Skills with Mastery",
+  description: "Track, Analyze, and Improve Your Skills with Ease",
+}
 
+export default async function Page() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-      <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-        <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
-          Create <span className="text-[hsl(280,100%,70%)]">T3</span> App
-        </h1>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
-          <Link
-            className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
-            href="https://create.t3.gg/en/usage/first-steps"
-            target="_blank"
-          >
-            <h3 className="text-2xl font-bold">First Steps →</h3>
-            <div className="text-lg">
-              Just the basics - Everything you need to know to set up your
-              database and authentication.
-            </div>
-          </Link>
-          <Link
-            className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
-            href="https://create.t3.gg/en/introduction"
-            target="_blank"
-          >
-            <h3 className="text-2xl font-bold">Documentation →</h3>
-            <div className="text-lg">
-              Learn more about Create T3 App, the libraries it uses, and how to
-              deploy it.
-            </div>
-          </Link>
-        </div>
-        {/* <div className="flex flex-col items-center gap-2">
-          <p className="text-2xl text-white">
-            {hello ? hello.greeting : "Loading tRPC query..."}
-          </p>
-
-          <div className="flex flex-col items-center justify-center gap-4">
-            <p className="text-center text-2xl text-white">
-              {session && <span>Logged in as {session.user?.name}</span>}
-            </p>
-            <Link
-              href={session ? "/api/auth/signout" : "/api/auth/signin"}
-              className="rounded-full bg-white/10 px-10 py-3 font-semibold no-underline transition hover:bg-white/20"
-            >
-              {session ? "Sign out" : "Sign in"}
-            </Link>
-          </div>
-        </div>
-
-        <CrudShowcase /> */}
+    <div>
+      <div className="border-b flex justify-between items-center px-6 py-4">
+        <Label className="text-lg font-bold">FPlanner</Label>
+        <Link href="/dashboard">
+          <Button size="sm" variant="outline">
+            Log in
+          </Button>
+        </Link>
       </div>
-    </main>
-  );
+      <div className="overflow-hidden py-20 sm:py-32 lg:pb-32 xl:pb-36">
+        <Container>
+          <div className="lg:grid lg:grid-cols-12 lg:gap-x-8 lg:gap-y-20">
+            <div className="relative z-10 mx-auto max-w-2xl lg:col-span-7 lg:max-w-none lg:pt-6 xl:col-span-6">
+              <h1 className="text-4xl font-medium tracking-tight text-gray-900">
+                Track your progress and master your skills with ease.
+              </h1>
+              <p className="mt-6 text-lg text-gray-600">
+                Log your practice sessions effortlessly and watch your progress grow over time.
+                Set personalized goals and celebrate every milestone you reach on your journey to mastery.
+                Gain insights into your practice habits with detailed analytics and personalized reports.
+                Connect with fellow learners, share your journey, and find inspiration and support.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-x-6 gap-y-4">
+                <Link href="/dashboard">
+                  <Button>
+                    Start for free
+                  </Button>
+                </Link>
+              </div>
+            </div>
+            <div className="relative -mt-4 lg:col-span-7 lg:mt-0 xl:col-span-6">
+              <Image
+                src="/app-screen.png"
+                alt=""
+                width={400}
+                height={800}
+                className="pointer-events-none absolute inset-0 w-full"
+              />
+            </div>
+          </div>
+        </Container>
+      </div>
+    </div>
+  )
 }
