@@ -104,7 +104,7 @@ export const SkillCard = ({ skill, totalHours }: SkillCardProps) => {
         totalHours={totalHours}
         onTrackClick={() => setTrackOpen(true)}
         onEditClick={() => setEditOpen(true)}
-        onDeleteClick={async () => await deleteAsyncSkill({id: skill.id})}
+        onDeleteClick={async () => await deleteAsyncSkill({ id: skill.id })}
         deleteIsLoading={deleteIsLoading}
       />
 

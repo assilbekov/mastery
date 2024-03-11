@@ -49,7 +49,7 @@ export function TimerDialog({ skill, open, setOpen }: TimerDialogProps) {
   }
 
   return (
-    <Drawer open={open} onClose={() => setOpen(true)}>
+    <Drawer open={open}>
       <DrawerContent>
         <div className="mx-auto w-full max-w-sm">
           <DrawerHeader>
