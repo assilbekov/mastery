@@ -25,7 +25,7 @@ const SkillCardInfo = ({ skill, totalHours, onCardClick }: SkillCardProps & { on
   const icon = skillIcons.find((icon) => icon.name === skill.icon);
 
   return (
-    <Card onClick={onCardClick}>
+    <Card onClick={onCardClick} className="cursor-pointer">
       <CardHeader>
         <div className="flex justify-between items-center gap-1">
           <CardTitle>{skill.name}</CardTitle>
@@ -67,13 +67,9 @@ export const SkillCard = ({ skill, totalHours }: SkillCardProps) => {
           onSubmit={async value => await mutateAsync({ ...value, id: skill.id })}
           isLoading={isLoading}
           defaultValues={{
-            name: "",
-            icon: "dumbbell",
-            color: "bg-blue-500",
-            description: "",
-            goalInHours: 100,
-            reminderTime: "12:30",
-            daysToPractice: ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"],
+            ...skill,
+            description: skill.description ?? undefined,
+            daysToPractice: skill.daysToPractice.split(","),
           }}
         />
       </DialogContent>

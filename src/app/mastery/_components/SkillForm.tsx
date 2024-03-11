@@ -81,7 +81,7 @@ export const skillFormSchema = z.object({
   color: z.string({ required_error: "Please select a color" }),
   icon: z.string({ required_error: "Please select an icon" }),
   description: z.string(),
-  goalInHours: z.number().int().positive(),
+  goalInHours: z.coerce.number().int().positive(),
   reminderTime: z.string(),
   daysToPractice: z.array(z.string()),
 })
